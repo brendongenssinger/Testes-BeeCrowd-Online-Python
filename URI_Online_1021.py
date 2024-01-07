@@ -44,31 +44,40 @@
 # 0 moeda(s) de R$ 0.01
 
 
-valorFloat = float(input());
-valorInteiro = int(valorFloat);
-valorMoeda = float("{:.2f}".format(valorFloat - valorInteiro));
+receberValor = input()
+if receberValor == "":
+    receberValor = "0.00"
+    
+valorFloat = float(receberValor)
 
 # Notas para decompor 100,50,20,10,5,2,1;
-notasDecompor = [100,50,20,10,5,2];
-moedasDecompor = [1,0.50,0.25,0.10,0.05,0.01];
-positionArray = 0;
-print("NOTAS :");
+notasDecompor = [100,50,20,10,5,2]
+moedasDecompor = [1.00,0.50,0.25,0.10,0.05,0.01]
+positionArray = 0
+print("NOTAS:")
 
-if(valorInteiro >0 & valorInteiro<1000000.00):
+if(0.00 < valorFloat < 1000000.00):
     for x in notasDecompor:
-        if(valorInteiro >= x):
-            calc = int(valorInteiro/x);
-            print(str(calc)+" nota(s) de R$ " + str(x) + ",00");
-            valorInteiro = valorInteiro - (calc*x);            
+        if(valorFloat >= x):
+            calc = int(valorFloat/x)
+            print(str(calc)+" nota(s) de R$ " + str(x) + ".00")
+            valorFloat = valorFloat - (calc*x)       
         else:
-            print("0 nota(s) de R$ " + str(x) + ",00");
+            print("0 nota(s) de R$ " + str(x) + ".00")
                     
-if(valorMoeda >=0.1 and valorMoeda<1000000.00):
-    for x in moedasDecompor:
-        if(valorMoeda >= x):
-            valorMoeda = valorMoeda - x;
-            print(str(calc)+" moeda(s) de R$ " + str(x) );
-        else:
-            print("0 moeda(s) de R$ " + str(x));              
+print("MOEDAS:")
+valorFloat = round(valorFloat,2)
+
+for x in moedasDecompor:
+    if(valorFloat >= x):
+        qtdMoedas = int((valorFloat/x))
+        valorFloat = round(valorFloat - (qtdMoedas * x),2)
+        print(str(qtdMoedas)+" moeda(s) de R$ " + "{:.2f}".format(x))
+    else:
+        print("0 moeda(s) de R$ " + "{:.2f}".format(x))           
+  
+
+
+
 
 
