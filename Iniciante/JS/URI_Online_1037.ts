@@ -24,39 +24,63 @@ const rl = readline.createInterface({
 });
 
 const arrayValues = [0,25,50,75,100]
+const arrayValuesSort = arrayValues.sort((a,b)=> b-a);
+const maxValue = Math.max(...arrayValues);
+const minValue = Math.min(...arrayValues);
 
 rl.question('', (input: string) => {
 
     const textIntervalo = 'Intervalo'
-    const inputNumber = Number(input);
-    //console.log(inputNumber);
+    const inputNumber = Number(input);    
     let stop = false;
 
-    if(arrayValues.find((item,index)=> item==inputNumber)){
-
-    }
-    arrayValues.forEach((item,index)=>{
-        //console.log(item)
-        if(stop)return;
-        if()
-        if(inputNumber < 0){
-            console.log('Fora do intervalo');
+    arrayValuesSort.forEach((item,index)=>{        
+        if(stop)return;        
+        // -0.00 e > 100.01
+        if(inputNumber < minValue || inputNumber>maxValue){
+            console.log('Fora de intervalo');
             stop = true;
-            
+            showConsole('if 1')
+        }
+        
+        else if(inputNumber==item && arrayValues[index+1] == minValue){
+            console.log(`${textIntervalo} [${arrayValues[index+1]},${item}]`);
+            stop = true;
+            showConsole('if 2')
+        }
+        else if (inputNumber==item && inputNumber == maxValue){
+            console.log(`${textIntervalo} (${arrayValues[index+1]},${item}]`);
+            stop = true;
+            showConsole('if 3')
+        }       
+        else if(inputNumber==item && inputNumber== minValue){
+            console.log(`${textIntervalo} [${item},${arrayValues[index-1]}]`);
+            stop = true;            
+            showConsole('if 4')
         }
         else if(inputNumber==item){
-            console.log(`${textIntervalo} [${item},${arrayValues[index+1]})`);
-            stop = true;
+            console.log(`${textIntervalo} (${arrayValues[index+1]},${item}]`);
+            stop = true;            
+            showConsole('if 4')
+        }
+        else if (inputNumber>item && inputNumber <= maxValue && inputNumber >= minValue){
+            console.log(`${textIntervalo} (${arrayValues[index]},${arrayValues[index-1]}]`);
+            stop = true;            
+            showConsole('if 5')
             
         }
-        else if (inputNumber>item){
-            console.log(`${textIntervalo} (${arrayValues[index-1]},${item})`);
-            stop = true;
-            
-        }
+        
        
     });
     
     rl.close();
+
+    
 });
+
+
+
+function showConsole(message: string) {
+    //console.log(message)
+}
 

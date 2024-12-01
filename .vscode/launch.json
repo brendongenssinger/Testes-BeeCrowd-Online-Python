@@ -1,20 +1,19 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug URI_Online_1038",
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "args": ["${workspaceFolder}\\Iniciante\\JS\\URI_Online_1038.ts"],
+           
+            "runtimeArgs": ["-r", "ts-node/register"],
+            "runtimeExecutable": "node",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\Iniciante\\JS\\URI_Online_1037.ts",
-            "outFiles": [
-                "${workspaceFolder}/**/*.js"
-            ]
+            "cwd": "${workspaceFolder}",
+            "protocol": "inspector"
         }
     ]
 }
